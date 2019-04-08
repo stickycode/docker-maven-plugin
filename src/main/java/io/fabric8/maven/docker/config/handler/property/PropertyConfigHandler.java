@@ -110,6 +110,10 @@ public class PropertyConfigHandler implements ExternalConfigHandler {
             return true;
         }
 
+        if (isStringValueNull(valueProvider, config, CONTEXT_DIR, () -> config.getContextDirRaw())) {
+            return true;
+        }
+
         if (isStringValueNull(valueProvider, config, DOCKER_FILE_DIR, () -> config.getDockerFileDirRaw())) {
             return true;
         }
@@ -139,6 +143,7 @@ public class PropertyConfigHandler implements ExternalConfigHandler {
                 .args(valueProvider.getMap(ARGS, config == null ? null : config.getArgs()))
                 .labels(valueProvider.getMap(LABELS, config == null ? null : config.getLabels()))
                 .ports(extractPortValues(config == null ? null : config.getPorts(), valueProvider))
+                .shell(extractArguments(valueProvider, SHELL, config == null ? null : config.getShell()))
                 .runCmds(valueProvider.getList(RUN, config == null ? null : config.getRunCmds()))
                 .from(valueProvider.getString(FROM, config == null ? null : config.getFrom()))
                 .fromExt(valueProvider.getMap(FROM_EXT, config == null ? null : config.getFromExt()))
@@ -149,6 +154,7 @@ public class PropertyConfigHandler implements ExternalConfigHandler {
                 .workdir(valueProvider.getString(WORKDIR, config == null ? null : config.getWorkdir()))
                 .skip(valueProvider.getBoolean(SKIP_BUILD, config == null ? null : config.getSkip()))
                 .imagePullPolicy(valueProvider.getString(IMAGE_PULL_POLICY_BUILD, config == null ? null : config.getImagePullPolicy()))
+                .contextDir(valueProvider.getString(CONTEXT_DIR, config == null ? null : config.getContextDirRaw()))
                 .dockerArchive(valueProvider.getString(DOCKER_ARCHIVE, config == null ? null : config.getDockerArchiveRaw()))
                 .dockerFile(valueProvider.getString(DOCKER_FILE, config == null ? null : config.getDockerFileRaw()))
                 .dockerFileDir(valueProvider.getString(DOCKER_FILE_DIR, config == null ? null : config.getDockerFileDirRaw()))
@@ -208,6 +214,7 @@ public class PropertyConfigHandler implements ExternalConfigHandler {
                 .cpus(valueProvider.getLong(CPUS, config == null ? null : config.getCpus()))
                 .cpuSet(valueProvider.getString(CPUSET, config == null ? null : config.getCpuSet()))
                 .readOnly(valueProvider.getBoolean(READ_ONLY, config == null ? null : config.getReadOnly()))
+                .autoRemove(valueProvider.getBoolean(AUTO_REMOVE, config == null ? null : config.getAutoRemove()))
                 .build();
     }
 

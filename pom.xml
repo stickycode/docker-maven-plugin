@@ -6,7 +6,7 @@
 
   <groupId>io.fabric8</groupId>
   <artifactId>docker-maven-plugin</artifactId>
-  <version>0.29-SNAPSHOT</version>
+  <version>0.30.0</version>
   <packaging>maven-plugin</packaging>
 
   <name>docker-maven-plugin</name>
@@ -384,7 +384,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-	  <version>${surefire.version}</version>
+          <version>${surefire.version}</version>
           <configuration>
             <argLine>
               -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
@@ -426,7 +426,7 @@
   <scm>
     <connection>scm:git:git://github.com/fabric8io/docker-maven-plugin.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/fabric8io/docker-maven-plugin.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v0.30.0</tag>
     <url>git://github.com/fabric8io/docker-maven-plugin.git</url>
   </scm>
 

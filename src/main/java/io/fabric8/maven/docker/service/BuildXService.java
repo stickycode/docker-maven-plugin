@@ -64,10 +64,10 @@ public class BuildXService {
         Path configPath = getDockerStateDir(imageConfig.getBuildConfiguration(),  buildDirs);
         List<String> buildX = Arrays.asList("docker", "--config", configPath.toString(), "buildx");
 
-        String builderName = createBuilder(configPath, buildX, imageConfig, buildDirs);
         Path configJson = configPath.resolve("config.json");
         try {
             createConfigJson(configJson, authConfig);
+            String builderName = createBuilder(configPath, buildX, imageConfig, buildDirs);
             builder.useBuilder(buildX, builderName, buildDirs, imageConfig,  configuredRegistry, context);
         } finally {
             removeConfigJson(configJson);
